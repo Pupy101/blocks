@@ -1,0 +1,10 @@
+[tool.pylint]
+max-line-length=100
+disable=[
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    ]
+
+[tool.mypy]
+ignore_missing_imports = true
