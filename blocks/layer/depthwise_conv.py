@@ -7,8 +7,8 @@ class DepthwiseConv2d(nn.Module):
         in_channels: int,
         out_channels: int,
         kernel_size: int,
-        stride: int,
-        padding: int,
+        stride: int = 1,
+        padding: int = 0,
         bias: bool = True,
     ) -> None:
         super().__init__()

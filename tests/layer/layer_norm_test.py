@@ -3,7 +3,7 @@ from typing import Any, Dict, List
 import pytest
 import torch
 
-from blocks import LayerNorm2d
+from blocks.layer import LayerNorm2d
 from tests.utils import create_product_parametrize
 
 PARAMS: Dict[str, List[Any]] = {

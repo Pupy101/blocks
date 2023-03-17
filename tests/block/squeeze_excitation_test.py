@@ -3,8 +3,8 @@ from typing import Any, Dict, List
 import pytest
 import torch
 
-from blocks import SqueezeExcitation2d
-from tests.utils import compute_conv_size, create_product_parametrize
+from blocks.block import SqueezeExcitationBlock2d
+from tests.utils import create_product_parametrize
 
 PARAMS: Dict[str, List[Any]] = {
     "batch_size": [4],
@@ -24,10 +24,10 @@ def test(
     width: int,
     device: torch.device,
 ) -> None:
-    conv = SqueezeExcitation2d(in_channels=in_channels, squeeze_channels=squeeze_channels).to(
+    block = SqueezeExcitationBlock2d(in_channels=in_channels, squeeze_channels=squeeze_channels).to(
         device
     )
     input_batch = torch.rand(batch_size, in_channels, heigth, width).to(device)
     with torch.no_grad():
-        output_batch: torch.Tensor = conv(input_batch)
+        output_batch: torch.Tensor = block(input_batch)
     assert tuple(output_batch.shape) == (batch_size, in_channels, heigth, width)
