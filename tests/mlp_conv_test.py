@@ -32,7 +32,7 @@ def test(
     width: int,
     device: torch.device,
 ) -> None:
-    conv = MLPConv2d(
+    mlp = MLPConv2d(
         in_channels=in_channels,
         hidden_channels=hidden_channels,
         out_channels=out_channels,
@@ -42,7 +42,7 @@ def test(
     ).to(device)
     input_batch = torch.rand(batch_size, in_channels, heigth, width).to(device)
     with torch.no_grad():
-        output_batch: torch.Tensor = conv(input_batch)
+        output_batch: torch.Tensor = mlp(input_batch)
     kwargs = dict(kernel_size=kernel_size, padding=padding)
     # 2 times compute size because apply 2 times convolution in MLPConv2d
     out_heigth = compute_conv_size(size=compute_conv_size(size=heigth, **kwargs), **kwargs)
