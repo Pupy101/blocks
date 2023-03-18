@@ -3,7 +3,7 @@ from typing import Callable
 from torch import Tensor, nn
 
 
-class MLPConv2d(nn.Module):
+class MLP2d(nn.Module):
     def __init__(  # pylint:disable=too-many-arguments
         self,
         in_channels: int,

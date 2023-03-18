@@ -1,14 +1,14 @@
 from torch import Tensor, nn
 
 
-class DepthwiseConv2d(nn.Module):
+class DWConv2d(nn.Module):
     def __init__(  # pylint: disable=too-many-arguments
         self,
         in_channels: int,
         out_channels: int,
         kernel_size: int,
-        stride: int,
-        padding: int,
+        stride: int = 1,
+        padding: int = 0,
         bias: bool = True,
     ) -> None:
         super().__init__()

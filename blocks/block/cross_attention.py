@@ -1,13 +1,8 @@
 from torch import Tensor, einsum, nn, rand  # pylint: disable=E0611
 
 
-class CrossAttentionConv2d(nn.Module):
-    def __init__(
-        self,
-        in_channels: int,
-        out_channels: int,
-        num_heads: int,
-    ) -> None:
+class CrossAttention2d(nn.Module):
+    def __init__(self, in_channels: int, out_channels: int, num_heads: int) -> None:
         super().__init__()
 
         assert (
