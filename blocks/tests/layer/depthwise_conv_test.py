@@ -4,7 +4,7 @@ import pytest
 import torch
 
 from blocks.layer import DWConv2d
-from tests.utils import compute_conv_size, create_product_parametrize
+from blocks.tests.utils import compute_conv_size, create_product_parametrize
 
 PARAMS: Dict[str, List[Any]] = {
     "batch_size": [4],

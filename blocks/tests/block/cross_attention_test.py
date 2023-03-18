@@ -5,7 +5,7 @@ import pytest
 import torch
 
 from blocks.block import CrossAttention2d
-from tests.utils import create_product_parametrize
+from blocks.tests.utils import create_product_parametrize
 
 PARAMS: Dict[str, List[Any]] = {
     "in_channels": [12, 32],
