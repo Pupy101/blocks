@@ -27,11 +27,13 @@ def test(
     with torch.no_grad():
         output_batch: torch.Tensor = norm(input_batch)
     assert tuple(output_batch.shape) == (batch_size, channels, heigth, width)
-    assert torch.all(
-        torch.round(torch.mean(output_batch, dim=(2, 3)))
-        == torch.zeros(batch_size, channels).to(device)
+    assert torch.allclose(
+        torch.mean(output_batch, dim=(2, 3)),
+        torch.zeros(batch_size, channels).to(device),
+        atol=1e-3,
     )
-    assert torch.all(
-        torch.round(torch.std(output_batch, dim=(2, 3)))
-        == torch.ones(batch_size, channels).to(device)
+    assert torch.allclose(
+        torch.std(output_batch, dim=(2, 3)),
+        torch.ones(batch_size, channels).to(device),
+        atol=1e-3,
     )
