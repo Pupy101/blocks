@@ -4,7 +4,7 @@ import pytest
 import torch
 
 from blocks.block import MLP2d
-from tests.utils import compute_conv_size, create_product_parametrize
+from blocks.tests.utils import compute_conv_size, create_product_parametrize
 
 PARAMS: Dict[str, List[Any]] = {
     "in_channels": [8, 16],

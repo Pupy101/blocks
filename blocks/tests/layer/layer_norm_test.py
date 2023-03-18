@@ -4,7 +4,7 @@ import pytest
 import torch
 
 from blocks.layer import LayerNorm2d
-from tests.utils import create_product_parametrize
+from blocks.tests.utils import create_product_parametrize
 
 PARAMS: Dict[str, List[Any]] = {
     "batch_size": [4],

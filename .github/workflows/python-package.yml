@@ -39,4 +39,4 @@ jobs:
           mypy --config-file=pyproject.toml blocks
       - name: Test with pytest
         run: |
-          pytest tests --disable-pytest-warnings
+          pytest . --disable-pytest-warnings

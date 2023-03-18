@@ -4,7 +4,7 @@ import pytest
 import torch
 
 from blocks.block import ResNetBlock2d, ResNetDWBlock2d
-from tests.utils import compute_conv_size, create_product_parametrize
+from blocks.tests.utils import compute_conv_size, create_product_parametrize
 
 PARAMS: Dict[str, List[Any]] = {
     "block_type": [ResNetBlock2d, ResNetDWBlock2d],
