@@ -2,14 +2,14 @@ from typing import Optional, Union
 
 from torch import Tensor, nn
 
-from blocks.layer import DepthwiseConv2d
+from blocks.layer import DWConv2d
 
 
 class BaseResNetBlock2d(nn.Module):
-    conv1: Union[nn.Conv2d, DepthwiseConv2d]
+    conv1: Union[nn.Conv2d, DWConv2d]
     bn1: nn.BatchNorm2d
     relu: nn.ReLU
-    conv2: Union[nn.Conv2d, DepthwiseConv2d]
+    conv2: Union[nn.Conv2d, DWConv2d]
     bn2: nn.BatchNorm2d
     downsample: Optional[nn.Sequential]
 
@@ -59,21 +59,19 @@ class ResNetDWBlock2d(BaseResNetBlock2d):
     def __init__(self, in_channels: int, out_channels: int, stride: int = 1):
         super().__init__()
 
-        self.conv1 = DepthwiseConv2d(
+        self.conv1 = DWConv2d(
             in_channels, out_channels, kernel_size=3, stride=stride, padding=1, bias=False
         )
         self.bn1 = nn.BatchNorm2d(out_channels)
         self.relu = nn.ReLU(inplace=True)
-        self.conv2 = DepthwiseConv2d(
+        self.conv2 = DWConv2d(
             out_channels, out_channels, kernel_size=3, stride=1, padding=1, bias=False
         )
         self.bn2 = nn.BatchNorm2d(out_channels)
 
         if stride != 1 or in_channels != out_channels:
             self.downsample = nn.Sequential(
-                DepthwiseConv2d(
-                    in_channels, out_channels, kernel_size=1, stride=stride, bias=False
-                ),
+                DWConv2d(in_channels, out_channels, kernel_size=1, stride=stride, bias=False),
                 nn.BatchNorm2d(out_channels),
             )
         else:

@@ -3,7 +3,7 @@ from typing import Any, Dict, List
 import pytest
 import torch
 
-from blocks.layer import DepthwiseConv2d
+from blocks.layer import DWConv2d
 from tests.utils import compute_conv_size, create_product_parametrize
 
 PARAMS: Dict[str, List[Any]] = {
@@ -30,7 +30,7 @@ def test(
     width: int,
     device: torch.device,
 ) -> None:
-    layer = DepthwiseConv2d(
+    layer = DWConv2d(
         in_channels=in_channels,
         out_channels=out_channels,
         kernel_size=kernel_size,

@@ -3,7 +3,7 @@ from typing import Callable
 from torch import Tensor, nn
 
 
-class SqueezeExcitationBlock2d(nn.Module):
+class SEBlock2d(nn.Module):
     def __init__(
         self,
         in_channels: int,

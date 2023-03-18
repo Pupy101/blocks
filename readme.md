@@ -12,11 +12,11 @@
 4. `ResNetDWBlock2d`
 5. `ResNetBottleneck2d`
 6. `ResNetDWBottleneck2d`
-7. `SqueezeExcitationBlock2d`
+7. `SEBlock2d`
 
 ### Layers:
 
-1. `DepthwiseConv2d`
+1. `DWConv2d`
 2. `LayerNorm2d`
 
 ### Some examples:

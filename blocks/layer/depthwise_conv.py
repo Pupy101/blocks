@@ -1,7 +1,7 @@
 from torch import Tensor, nn
 
 
-class DepthwiseConv2d(nn.Module):
+class DWConv2d(nn.Module):
     def __init__(  # pylint: disable=too-many-arguments
         self,
         in_channels: int,

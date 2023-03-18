@@ -3,7 +3,7 @@ from typing import Any, Dict, List
 import pytest
 import torch
 
-from blocks.block import SqueezeExcitationBlock2d
+from blocks.block import SEBlock2d
 from tests.utils import create_product_parametrize
 
 PARAMS: Dict[str, List[Any]] = {
@@ -24,9 +24,7 @@ def test(
     width: int,
     device: torch.device,
 ) -> None:
-    block = SqueezeExcitationBlock2d(in_channels=in_channels, squeeze_channels=squeeze_channels).to(
-        device
-    )
+    block = SEBlock2d(in_channels=in_channels, squeeze_channels=squeeze_channels).to(device)
     input_batch = torch.rand(batch_size, in_channels, heigth, width).to(device)
     with torch.no_grad():
         output_batch: torch.Tensor = block(input_batch)
