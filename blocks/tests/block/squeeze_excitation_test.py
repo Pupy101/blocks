@@ -16,7 +16,7 @@ PARAMS: Dict[str, List[Any]] = {
 
 
 @pytest.mark.parametrize(*create_product_parametrize(PARAMS))
-def test(
+def test(  # pylint: disable=too-many-arguments
     batch_size: int,
     in_channels: int,
     squeeze_channels: int,
@@ -27,5 +27,5 @@ def test(
     block = SEBlock2d(in_channels=in_channels, squeeze_channels=squeeze_channels).to(device)
     input_batch = torch.rand(batch_size, in_channels, heigth, width).to(device)
     with torch.no_grad():
-        output_batch: torch.Tensor = block(input_batch)
+        output_batch = block.forward(input_batch)
     assert tuple(output_batch.shape) == (batch_size, in_channels, heigth, width)
