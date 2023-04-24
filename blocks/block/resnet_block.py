@@ -36,14 +36,10 @@ class ResNetBlock2d(BaseResNetBlock2d):
     def __init__(self, in_channels: int, out_channels: int, stride: int = 1):
         super().__init__()
 
-        self.conv1 = nn.Conv2d(
-            in_channels, out_channels, kernel_size=3, stride=stride, padding=1, bias=False
-        )
+        self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=3, stride=stride, padding=1, bias=False)
         self.bn1 = nn.BatchNorm2d(out_channels)
         self.relu = nn.ReLU(inplace=True)
-        self.conv2 = nn.Conv2d(
-            out_channels, out_channels, kernel_size=3, stride=1, padding=1, bias=False
-        )
+        self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3, stride=1, padding=1, bias=False)
         self.bn2 = nn.BatchNorm2d(out_channels)
 
         if stride != 1 or in_channels != out_channels:
@@ -59,14 +55,10 @@ class ResNetDWBlock2d(BaseResNetBlock2d):
     def __init__(self, in_channels: int, out_channels: int, stride: int = 1):
         super().__init__()
 
-        self.conv1 = DWConv2d(
-            in_channels, out_channels, kernel_size=3, stride=stride, padding=1, bias=False
-        )
+        self.conv1 = DWConv2d(in_channels, out_channels, kernel_size=3, stride=stride, padding=1, bias=False)
         self.bn1 = nn.BatchNorm2d(out_channels)
         self.relu = nn.ReLU(inplace=True)
-        self.conv2 = DWConv2d(
-            out_channels, out_channels, kernel_size=3, stride=1, padding=1, bias=False
-        )
+        self.conv2 = DWConv2d(out_channels, out_channels, kernel_size=3, stride=1, padding=1, bias=False)
         self.bn2 = nn.BatchNorm2d(out_channels)
 
         if stride != 1 or in_channels != out_channels:

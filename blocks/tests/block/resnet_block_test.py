@@ -18,7 +18,7 @@ PARAMS: Dict[str, List[Any]] = {
 
 
 @pytest.mark.parametrize(*create_product_parametrize(PARAMS))
-def test(
+def test(  # pylint: disable=too-many-arguments
     block_type: Union[Type[ResNetBlock2d], Type[ResNetDWBlock2d]],
     in_channels: int,
     out_channels: int,
@@ -31,8 +31,8 @@ def test(
     block = block_type(in_channels=in_channels, out_channels=out_channels, stride=stride).to(device)
     input_batch = torch.rand(batch_size, in_channels, heigth, width).to(device)
     with torch.no_grad():
-        output_batch: torch.Tensor = block(input_batch)
-    kwargs = dict(kernel_size=3, padding=1, stride=stride)
+        output_batch = block.forward(input_batch)
+    kwargs = {"kernel_size": 3, "padding": 1, "stride": stride}
     out_heigth = compute_conv_size(heigth, **kwargs)
     out_width = compute_conv_size(width, **kwargs)
     assert tuple(output_batch.shape) == (batch_size, out_channels, out_heigth, out_width)

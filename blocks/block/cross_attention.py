@@ -1,4 +1,4 @@
-from torch import Tensor, einsum, nn, rand  # pylint: disable=E0611
+from torch import Tensor, einsum, nn, rand
 
 
 class CrossAttention2d(nn.Module):

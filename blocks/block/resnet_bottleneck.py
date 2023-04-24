@@ -52,9 +52,7 @@ class ResNetBottleneck2d(BaseResNetBottleneck):  # pylint: disable=too-many-inst
         self.conv1 = nn.Conv2d(in_channels, out_channels1, kernel_size=1, bias=False)
         self.bn1 = nn.BatchNorm2d(out_channels1)
 
-        self.conv2 = nn.Conv2d(
-            out_channels1, out_channels2, kernel_size=3, stride=stride, padding=1, bias=False
-        )
+        self.conv2 = nn.Conv2d(out_channels1, out_channels2, kernel_size=3, stride=stride, padding=1, bias=False)
         self.bn2 = nn.BatchNorm2d(out_channels2)
 
         self.conv3 = nn.Conv2d(out_channels2, out_channels3 * expansion, kernel_size=1, bias=False)
@@ -65,9 +63,7 @@ class ResNetBottleneck2d(BaseResNetBottleneck):  # pylint: disable=too-many-inst
 
         if stride != 1 or in_channels != out_channels3 * expansion:
             self.downsample = nn.Sequential(
-                nn.Conv2d(
-                    in_channels, out_channels3 * expansion, kernel_size=1, stride=stride, bias=False
-                ),
+                nn.Conv2d(in_channels, out_channels3 * expansion, kernel_size=1, stride=stride, bias=False),
                 nn.BatchNorm2d(out_channels3 * expansion),
             )
         else:
@@ -88,9 +84,7 @@ class ResNetDWBottleneck2d(BaseResNetBottleneck):  # pylint: disable=too-many-in
         self.conv1 = DWConv2d(in_channels, out_channels1, kernel_size=1, bias=False)
         self.bn1 = nn.BatchNorm2d(out_channels1)
 
-        self.conv2 = DWConv2d(
-            out_channels1, out_channels2, kernel_size=3, stride=stride, padding=1, bias=False
-        )
+        self.conv2 = DWConv2d(out_channels1, out_channels2, kernel_size=3, stride=stride, padding=1, bias=False)
         self.bn2 = nn.BatchNorm2d(out_channels2)
 
         self.conv3 = DWConv2d(out_channels2, out_channels3 * expansion, kernel_size=1, bias=False)
@@ -101,9 +95,7 @@ class ResNetDWBottleneck2d(BaseResNetBottleneck):  # pylint: disable=too-many-in
 
         if stride != 1 or in_channels != out_channels3 * expansion:
             self.downsample = nn.Sequential(
-                DWConv2d(
-                    in_channels, out_channels3 * expansion, kernel_size=1, stride=stride, bias=False
-                ),
+                DWConv2d(in_channels, out_channels3 * expansion, kernel_size=1, stride=stride, bias=False),
                 nn.BatchNorm2d(out_channels3 * expansion),
             )
         else:

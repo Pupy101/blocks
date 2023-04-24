@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
 
     steps:
       - uses: actions/checkout@v3
@@ -25,14 +25,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          python -m pip install -U pip
-          python -m pip install black isort mypy pylint pytest
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install -e .
+          python -m pip install -U pip setuptools
+          pip install -e .[dev]
       - name: Codestyle with black and isort
         run: |
-          black --check .
-          isort --check .
+          black --config=pyproject.toml --check blocks
+          isort --settings-path=pyproject.toml --check blocks
       - name: Lint with pylint
         run: |
           pylint --rcfile=pyproject.toml blocks

@@ -19,7 +19,7 @@ PARAMS: Dict[str, List[Any]] = {
 
 
 @pytest.mark.parametrize(*create_product_parametrize(PARAMS))
-def test(
+def test(  # pylint: disable=too-many-arguments
     batch_size: int,
     in_channels: int,
     out_channels: int,
@@ -39,8 +39,8 @@ def test(
     ).to(device)
     input_batch = torch.rand(batch_size, in_channels, heigth, width).to(device)
     with torch.no_grad():
-        output_batch: torch.Tensor = layer(input_batch)
-    kwargs = dict(kernel_size=kernel_size, stride=stride, padding=padding)
+        output_batch = layer.forward(input_batch)
+    kwargs = {"kernel_size": kernel_size, "stride": stride, "padding": padding}
     out_heigth = compute_conv_size(size=heigth, **kwargs)
     out_width = compute_conv_size(size=width, **kwargs)
     assert tuple(output_batch.shape) == (batch_size, out_channels, out_heigth, out_width)

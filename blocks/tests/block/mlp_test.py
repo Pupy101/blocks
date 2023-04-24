@@ -42,8 +42,8 @@ def test(
     ).to(device)
     input_batch = torch.rand(batch_size, in_channels, heigth, width).to(device)
     with torch.no_grad():
-        output_batch: torch.Tensor = mlp(input_batch)
-    kwargs = dict(kernel_size=kernel_size, padding=padding)
+        output_batch = mlp.forward(input_batch)
+    kwargs = {"kernel_size": kernel_size, "padding": padding}
     # 2 times compute size because apply 2 times convolution in MLPConv2dBlock
     out_heigth = compute_conv_size(size=compute_conv_size(size=heigth, **kwargs), **kwargs)
     out_width = compute_conv_size(size=compute_conv_size(size=width, **kwargs), **kwargs)

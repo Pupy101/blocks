@@ -1,4 +1,4 @@
-from torch import Tensor, nn, ones, zeros  # pylint: disable=no-name-in-module
+from torch import Tensor, nn, ones, zeros
 
 
 class LayerNorm2d(nn.Module):
