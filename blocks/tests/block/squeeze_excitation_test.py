@@ -16,7 +16,7 @@ PARAMS: Dict[str, List[Any]] = {
 
 
 @pytest.mark.parametrize(*create_product_parametrize(PARAMS))
-def test(  # pylint: disable=too-many-arguments
+def test(
     batch_size: int,
     in_channels: int,
     squeeze_channels: int,
