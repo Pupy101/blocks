@@ -18,7 +18,7 @@ PARAMS: Dict[str, List[Any]] = {
 
 
 @pytest.mark.parametrize(*create_product_parametrize(PARAMS))
-def test(  # pylint: disable=too-many-arguments
+def test(
     block_type: Union[Type[ResNetBlock2d], Type[ResNetDWBlock2d]],
     in_channels: int,
     out_channels: int,

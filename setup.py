@@ -25,7 +25,7 @@ def find_requirements() -> List[str]:
 
 setup(
     name="blocks",
-    version="0.1",
+    version="0.2",
     description="Library with torch blocks",
     author="Sergei Porkhun",
     author_email="ser.porkhun41@gmail.com",

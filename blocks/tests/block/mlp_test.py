@@ -1,18 +1,19 @@
-from typing import Any, Dict, List
+from typing import Any, Callable, Dict, List, Optional
 
 import pytest
 import torch
+from torch import Tensor
+from torch.nn import functional as F
 
 from blocks.block import MLP2d
-from blocks.tests.utils import compute_conv_size, create_product_parametrize
+from blocks.tests.utils import create_product_parametrize
 
 PARAMS: Dict[str, List[Any]] = {
     "in_channels": [8, 16],
     "hidden_channels": [256],
-    "out_channels": [16, 32],
-    "kernel_size": [2, 3],
-    "padding": [0, 1],
-    "droupout": [0.0, 0.5],
+    "out_channels": [16, 32, None],
+    "dropout": [0.0, 0.5],
+    "activation": [F.relu, F.gelu],
     "batch_size": [4],
     "heigth": [64, 112],
     "width": [64, 112],
@@ -23,10 +24,9 @@ PARAMS: Dict[str, List[Any]] = {
 def test(
     in_channels: int,
     hidden_channels: int,
-    out_channels: int,
-    kernel_size: int,
-    padding: int,
-    droupout: float,
+    out_channels: Optional[int],
+    dropout: float,
+    activation: Callable[[Tensor], Tensor],
     batch_size: int,
     heigth: int,
     width: int,
@@ -36,15 +36,11 @@ def test(
         in_channels=in_channels,
         hidden_channels=hidden_channels,
         out_channels=out_channels,
-        kernel_size=kernel_size,
-        padding=padding,
-        droupout=droupout,
+        dropout=dropout,
+        activation=activation,
     ).to(device)
     input_batch = torch.rand(batch_size, in_channels, heigth, width).to(device)
     with torch.no_grad():
         output_batch = mlp.forward(input_batch)
-    kwargs = {"kernel_size": kernel_size, "padding": padding}
-    # 2 times compute size because apply 2 times convolution in MLPConv2dBlock
-    out_heigth = compute_conv_size(size=compute_conv_size(size=heigth, **kwargs), **kwargs)
-    out_width = compute_conv_size(size=compute_conv_size(size=width, **kwargs), **kwargs)
-    assert tuple(output_batch.shape) == (batch_size, out_channels, out_heigth, out_width)
+    out_channels = out_channels or in_channels
+    assert tuple(output_batch.shape) == (batch_size, out_channels, heigth, width)

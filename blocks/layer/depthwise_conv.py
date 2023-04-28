@@ -2,7 +2,7 @@ from torch import Tensor, nn
 
 
 class DWConv2d(nn.Module):
-    def __init__(  # pylint: disable=too-many-arguments
+    def __init__(
         self,
         in_channels: int,
         out_channels: int,

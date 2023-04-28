@@ -7,6 +7,7 @@ disable=[
     "duplicate-code",
     "no-member",
     "no-name-in-module",
+    "too-many-arguments",
     ]
 good-names="p"
 
